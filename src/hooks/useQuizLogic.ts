@@ -51,7 +51,9 @@ function useQuizLogic() {
     score,
     number,
     userAnswers,
+    loading,
     questions,
+    TOTAL_QUESTIONS
   };
 }
 
