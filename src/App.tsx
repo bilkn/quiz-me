@@ -2,8 +2,17 @@ import React from 'react';
 import useQuizLogic from './hooks/useQuizLogic';
 import { QuestionCard } from './components';
 
+const TOTAL_QUESTIONS = 10;
+
 function App() {
-  const { startTrivia, nextQuestion } = useQuizLogic();
+  const {
+    startTrivia,
+    nextQuestion,
+    checkAnswer,
+    number,
+    userAnswers,
+    questions,
+  } = useQuizLogic();
 
   return (
     <div>
@@ -13,7 +22,14 @@ function App() {
       </button>
       <p className="score">Score:</p>
       <p>Loading Questions ...</p>
-      <QuestionCard />
+      <QuestionCard
+        questionNumber={number + 1}
+        totalQuestions={TOTAL_QUESTIONS}
+        question={questions[number].question}
+        answers={questions[number].answers}
+        userAnswer={userAnswers ? userAnswers[number] : undefined}
+        callback={checkAnswer}
+      />
       <button className="next" onClick={nextQuestion}>
         Next Question
       </button>
