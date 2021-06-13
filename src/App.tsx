@@ -1,8 +1,9 @@
 import React from 'react';
 import useQuizLogic from './hooks/useQuizLogic';
+import { QuestionCard } from './components';
 
 function App() {
-  const { startTrivia } = useQuizLogic();
+  const { startTrivia, nextQuestion } = useQuizLogic();
 
   return (
     <div>
@@ -12,6 +13,10 @@ function App() {
       </button>
       <p className="score">Score:</p>
       <p>Loading Questions ...</p>
+      <QuestionCard />
+      <button className="next" onClick={nextQuestion}>
+        Next Question
+      </button>
     </div>
   );
 }
