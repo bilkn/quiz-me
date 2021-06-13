@@ -1,13 +1,20 @@
 import { CancelTokenSource } from 'axios';
 import React, { useEffect, useState } from 'react';
-import { fetchQuizQuestions, Difficulty } from '../API';
+import { fetchQuizQuestions, Difficulty, QuestionState } from '../API';
+
+type AnswerObject = {
+  question: string;
+  answer: string;
+  correct: boolean;
+  correctAnswer: string;
+};
 
 function useQuizLogic() {
   console.log();
   const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
@@ -18,7 +25,7 @@ function useQuizLogic() {
         10,
         Difficulty.MEDIUM
       );
-      console.log(data)
+      console.log(data);
       cancelTokenObj = cancelToken;
       setQuestions(data);
     };

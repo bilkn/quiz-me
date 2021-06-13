@@ -2,6 +2,8 @@ import React from 'react';
 import useQuizLogic from './hooks/useQuizLogic';
 import { QuestionCard } from './components';
 
+
+
 const TOTAL_QUESTIONS = 10;
 
 function App() {
