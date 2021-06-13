@@ -8,6 +8,7 @@ type AnswerObject = {
   correct: boolean;
   correctAnswer: string;
 };
+const TOTAL_QUESTIONS = 10;
 
 function useQuizLogic() {
   console.log();
@@ -18,28 +19,26 @@ function useQuizLogic() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  useEffect(() => {
+  const startTrivia = async () => {
+    setLoading(true);
+    setGameOver(false);
     let cancelTokenObj: null | CancelTokenSource;
-    const fetchData = async () => {
+    try {
       const { data, cancelToken } = await fetchQuizQuestions(
-        10,
+        TOTAL_QUESTIONS,
         Difficulty.MEDIUM
       );
       console.log(data);
       cancelTokenObj = cancelToken;
       setQuestions(data);
-    };
-    try {
-      fetchData();
+      setScore(0)
+      setUserAnswers([])
+      setNumber(0);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
-    return () => {
-      cancelTokenObj?.cancel();
-    };
-  }, []);
-
-  const startTrivia = async () => {};
+  };
 
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
 
@@ -48,6 +47,8 @@ function useQuizLogic() {
     startTrivia,
     checkAnswer,
     nextQuestion,
+    gameOver,
+    score,
     number,
     userAnswers,
     questions,

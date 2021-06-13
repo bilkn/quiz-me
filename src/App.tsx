@@ -4,7 +4,6 @@ import { QuestionCard } from './components';
 
 
 
-const TOTAL_QUESTIONS = 10;
 
 function App() {
   const {
