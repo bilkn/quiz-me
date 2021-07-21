@@ -1,6 +1,6 @@
-import { CancelTokenSource } from 'axios';
-import React, { useEffect, useState } from 'react';
-import { fetchQuizQuestions, Difficulty, QuestionState } from '../API';
+import { CancelTokenSource } from "axios";
+import React, { useEffect, useState } from "react";
+import { fetchQuizQuestions, Difficulty, QuestionState } from "../API";
 
 type AnswerObject = {
   question: string;
@@ -28,16 +28,20 @@ function useQuizLogic() {
         TOTAL_QUESTIONS,
         Difficulty.MEDIUM
       );
-      console.log(data);
+      setQuestions(data);
       cancelTokenObj = cancelToken;
       setQuestions(data);
-      setScore(0)
-      setUserAnswers([])
-      setNumber(0);
-      setLoading(false);
+      reset()
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const reset = () => {
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
   };
 
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
@@ -53,7 +57,7 @@ function useQuizLogic() {
     userAnswers,
     loading,
     questions,
-    TOTAL_QUESTIONS
+    TOTAL_QUESTIONS,
   };
 }
 
