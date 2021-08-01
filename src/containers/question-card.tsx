@@ -7,8 +7,6 @@ type Props = {
   answers: string[];
   callback: (e: React.MouseEvent<HTMLButtonElement>) => void;
   userAnswer: AnswerObject | undefined;
-  questionNumber: number;
-  totalQuestions: number;
 };
 
 const QuestionCardContainer: React.FC<Props> = ({
@@ -16,13 +14,8 @@ const QuestionCardContainer: React.FC<Props> = ({
   answers,
   callback,
   userAnswer,
-  questionNumber,
-  totalQuestions,
 }) => (
   <QuestionCard>
-    <QuestionCard.Display>
-      Question: {questionNumber} / {totalQuestions}
-    </QuestionCard.Display>
     <QuestionCard.Text dangerouslySetInnerHTML={{ __html: question }} />
     <QuestionCard.Box>
       {answers.map((answer) => (

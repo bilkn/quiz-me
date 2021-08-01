@@ -1,8 +1,9 @@
 import React from "react";
 import useQuizLogic from "./hooks/useQuizLogic";
 import { QuestionCardContainer } from "./containers";
-import  "styled-components/macro";
+import "styled-components/macro";
 import Flex from "./components/flex";
+import { QuestionCard } from "./components";
 
 function App() {
   const {
@@ -19,20 +20,25 @@ function App() {
   } = useQuizLogic();
 
   return (
-    <Flex direction="column" justify="center">
-      <h1>REACT QUIZ</h1>
+    <Flex direction="column" justify="center" css="min-height:100vh;">
+      <QuestionCard.Title>QUIZ ME!</QuestionCard.Title>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <button className="start" onClick={startTrivia}>
+        <QuestionCard.Button variant="secondary" className="start" onClick={startTrivia} css="width:150px; margin:auto;">
           Start
-        </button>
+        </QuestionCard.Button>
       ) : null}
-      {!gameOver ? <p className="score">Score: {score}</p> : null}
+      {!gameOver ? (
+        <Flex css="padding:0 1em; margin-top:1em;">
+          <QuestionCard.Display>
+            Question: {number + 1} / {TOTAL_QUESTIONS}
+          </QuestionCard.Display>
+          <QuestionCard.Display className="score" css="margin-left:auto;">Score: {score}</QuestionCard.Display>
+        </Flex>
+      ) : null}
       {loading && <p>Loading Questions ...</p>}
 
       {!loading && !gameOver && (
         <QuestionCardContainer
-          questionNumber={number + 1}
-          totalQuestions={TOTAL_QUESTIONS}
           question={questions[number].question}
           answers={questions[number].answers}
           userAnswer={userAnswers ? userAnswers[number] : undefined}
