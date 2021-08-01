@@ -1,4 +1,5 @@
 import React from "react";
+import "styled-components/macro";
 import { QuestionCard } from "../components";
 import { AnswerObject } from "../hooks/useQuizLogic";
 
@@ -7,8 +8,6 @@ type Props = {
   answers: string[];
   callback: (e: React.MouseEvent<HTMLButtonElement>) => void;
   userAnswer: AnswerObject | undefined;
-  questionNumber: number;
-  totalQuestions: number;
 };
 
 const QuestionCardContainer: React.FC<Props> = ({
@@ -16,25 +15,26 @@ const QuestionCardContainer: React.FC<Props> = ({
   answers,
   callback,
   userAnswer,
-  questionNumber,
-  totalQuestions,
 }) => (
   <QuestionCard>
-    <QuestionCard.Display>
-      Question: {questionNumber} / {totalQuestions}
-    </QuestionCard.Display>
     <QuestionCard.Text dangerouslySetInnerHTML={{ __html: question }} />
     <QuestionCard.Box>
-      {answers.map((answer) => (
-        <div key={answer}>
-          <QuestionCard.Button
-            disabled={!!userAnswer}
-            value={answer}
-            onClick={callback}
-          >
-            <span dangerouslySetInnerHTML={{ __html: answer }} />
-          </QuestionCard.Button>
-        </div>
+      {answers.map((answer, i) => (
+        <QuestionCard.Button
+          key={answer}
+          disabled={!!userAnswer}
+          value={answer}
+          onClick={callback}
+          css={`
+            ${userAnswer && answer === userAnswer.answer
+              ? userAnswer.correct
+                ? "border: 2px solid green;"
+                : "border: 2px solid red;"
+              : ""}
+          `}
+        >
+          <span dangerouslySetInnerHTML={{ __html: answer }} />
+        </QuestionCard.Button>
       ))}
     </QuestionCard.Box>
   </QuestionCard>

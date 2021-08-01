@@ -14,6 +14,5 @@ export const Container = styled.div<Props>`
   display: flex;
   flex-direction: ${({ direction }) => direction || "initial"};
   justify-content: ${({ justify }) => justify};
-  min-height: 100vh;
   width: ${({ width }) => width || "100%"};
 `;
