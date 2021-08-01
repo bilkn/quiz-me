@@ -14,12 +14,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1em;
-  max-width: 290px;
   padding: 2em;
-
-  @media ${devices.tablet} {
-    max-width: 550px;
-  }
 `;
 
 export const Wrapper = styled.div``;
@@ -27,7 +22,12 @@ export const Wrapper = styled.div``;
 export const Title = styled.h1`
   color: white;
   font-family: ${fonts.handlee};
+  font-size: 3.5rem;
   margin-top: 1em;
+
+  @media ${devices.tablet} {
+    font-size: 5.5rem;
+  }
 `;
 
 export const Text = styled.p`
@@ -41,6 +41,7 @@ export const Text = styled.p`
 
 export const Display = styled.p`
   color: white;
+  font-size: 1.4rem;
 `;
 
 export const Box = styled.div`
@@ -54,7 +55,7 @@ export const Box = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: ${({ variant }:BTN_PROPS) =>
+  background-color: ${({ variant }: BTN_PROPS) =>
     variant === "secondary" ? colors.secondary : colors.extra3};
   border-radius: 5px;
   box-shadow: ${shadows.common};
