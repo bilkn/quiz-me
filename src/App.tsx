@@ -23,7 +23,6 @@ function App() {
   return (
     <Flex direction="column" css="min-height:100vh;">
       <QuestionCard.Title>QUIZ ME!</QuestionCard.Title>
-
       <Flex
         direction="column"
         css={`
@@ -31,7 +30,7 @@ function App() {
           max-width: 290px;
           width: auto;
           @media ${devices.tablet} {
-            max-width: 550px;
+            max-width: 600px;
           }
         `}
       >

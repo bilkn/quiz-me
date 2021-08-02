@@ -15,6 +15,7 @@ export const Container = styled.div`
   flex-direction: column;
   margin-top: 1em;
   padding: 2em;
+  position: relative;
 `;
 
 export const Wrapper = styled.div``;
@@ -44,13 +45,30 @@ export const Display = styled.p`
   font-size: 1.4rem;
 `;
 
+export const TimerContainer = styled.div`
+  background-color: white;
+  border-radius: 7px;
+  bottom: calc(100% - 20px);
+  box-shadow: ${shadows.common};
+  left: 50%;
+  padding: 0.5em 1.5em;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 90px;
+`;
+
+export const Timer = styled.p`
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+`;
+
 export const Box = styled.div`
   display: grid;
   margin-top: 2em;
   gap: 1em;
   grid-template-columns: repeat(1, 200px);
   @media ${devices.tablet} {
-    grid-template-columns: repeat(2, 200px);
+    grid-template-columns: repeat(2, 250px);
   }
 `;
 
@@ -62,8 +80,14 @@ export const Button = styled.button`
   font-size: 1.3rem;
   padding: 0.6em 1.5em;
   text-align: center;
+  transition: background-color 150ms;
   width: 100%;
 
+  &:hover,
+  &:focus {
+    background-color: ${({ variant }: BTN_PROPS) =>
+      variant === "secondary" ? colors.secondaryLight : colors.extra3Light};
+  }
   @media ${devices.tablet} {
     font-size: 1.5rem;
   }
