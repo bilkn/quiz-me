@@ -1,6 +1,6 @@
 # Quiz Me - A React Quiz game built with TypeScript.
 
-[Quiz Me(https://quizmee.netlify.app/)
+[Quiz Me](https://quizmee.netlify.app/)
 
 ## Getting Started
 
