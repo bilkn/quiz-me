@@ -44,7 +44,7 @@ function App() {
             Start
           </QuestionCard.Button>
         ) : null}
-        {!gameOver ? (
+        {!gameOver && !loading ? (
           <Flex css="margin-top:1em;">
             <QuestionCard.Display>
               Question: {number + 1} / {TOTAL_QUESTIONS}
@@ -54,7 +54,7 @@ function App() {
             </QuestionCard.Display>
           </Flex>
         ) : null}
-        {loading && <p>Loading Questions ...</p>}
+        {loading && <QuestionCard.Text>Loading Questions...</QuestionCard.Text>}
 
         {!loading && !gameOver && (
           <QuestionCardContainer
