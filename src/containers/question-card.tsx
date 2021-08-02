@@ -10,6 +10,7 @@ type Props = {
   answers: string[];
   callback: (e: React.MouseEvent<HTMLButtonElement>) => void;
   userAnswer: AnswerObject | undefined;
+  nextQuestion: Function;
 };
 
 const QuestionCardContainer: React.FC<Props> = ({
@@ -17,16 +18,22 @@ const QuestionCardContainer: React.FC<Props> = ({
   answers,
   callback,
   userAnswer,
+  nextQuestion,
 }) => {
   const [timer, setTimer] = useState(defaultTime);
 
-  const decreaseTime = () => {
-    setTimer((oldTime) => `00:${+oldTime.split(":")[1] - 1 + ""}`);
-  };
+  const decreaseTime = useCallback(() => {
+    if (timer === "00:00") nextQuestion();
+    setTimer((oldTime) => {
+      const oldTimeInseconds = +oldTime.split(":")[1];
+      const newTimeInSeconds = +timer.split(":")[1];
+      return `00:${(newTimeInSeconds <= 10 ? "0" : "") + (oldTimeInseconds - 1 + "")}`;
+    });
+  }, [nextQuestion, timer]);
 
   const startTimer = useCallback(() => {
     return setInterval(decreaseTime, 1000);
-  }, []);
+  }, [decreaseTime]);
 
   useEffect(() => {
     const interval = startTimer();
@@ -34,7 +41,7 @@ const QuestionCardContainer: React.FC<Props> = ({
   }, [startTimer]);
 
   useEffect(() => {
-    setTimer("00:45");
+    setTimer(defaultTime);
   }, [question]);
 
   return (

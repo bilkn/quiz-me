@@ -13,9 +13,13 @@ export const Container = styled.div`
   box-shadow: ${shadows.common};
   display: flex;
   flex-direction: column;
-  margin-top: 1em;
+  margin-top: 2em;
   padding: 2em;
   position: relative;
+
+  @media ${devices.tablet} {
+    margin-top: 1em;
+  }
 `;
 
 export const Wrapper = styled.div``;
@@ -51,8 +55,9 @@ export const TimerContainer = styled.div`
   bottom: calc(100% - 20px);
   box-shadow: ${shadows.common};
   left: 50%;
-  padding: 0.5em 1.5em;
+  padding: 0.5em;
   position: absolute;
+  text-align: center;
   transform: translateX(-50%);
   width: 90px;
 `;
