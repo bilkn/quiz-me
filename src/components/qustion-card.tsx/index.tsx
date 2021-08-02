@@ -4,6 +4,8 @@ import {
   Title,
   Text,
   Display,
+  TimerContainer,
+  Timer,
   Box,
   Button,
 } from "./styles/question-card";
@@ -27,6 +29,17 @@ QuestionCard.Title = function QuestionCardTitle({ children, ...rest }: iProps) {
 
 QuestionCard.Text = function QuestionCardText({ children, ...rest }: iProps) {
   return <Text {...rest}>{children}</Text>;
+};
+
+QuestionCard.TimerContainer = function QuestionCardTimerContainer({
+  children,
+  ...rest
+}: iProps) {
+  return <TimerContainer {...rest}>{children}</TimerContainer>;
+};
+
+QuestionCard.Timer = function QuestionCardTimer({ children, ...rest }: iProps) {
+  return <Timer {...rest}>{children}</Timer>;
 };
 
 QuestionCard.Display = function QuestionCardDisplay({

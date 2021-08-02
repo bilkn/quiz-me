@@ -23,7 +23,6 @@ function App() {
   return (
     <Flex direction="column" css="min-height:100vh;">
       <QuestionCard.Title>QUIZ ME!</QuestionCard.Title>
-
       <Flex
         direction="column"
         css={`
@@ -31,7 +30,7 @@ function App() {
           max-width: 290px;
           width: auto;
           @media ${devices.tablet} {
-            max-width: 550px;
+            max-width: 600px;
           }
         `}
       >
@@ -45,7 +44,7 @@ function App() {
             Start
           </QuestionCard.Button>
         ) : null}
-        {!gameOver ? (
+        {!gameOver && !loading ? (
           <Flex css="margin-top:1em;">
             <QuestionCard.Display>
               Question: {number + 1} / {TOTAL_QUESTIONS}
@@ -55,11 +54,12 @@ function App() {
             </QuestionCard.Display>
           </Flex>
         ) : null}
-        {loading && <p>Loading Questions ...</p>}
+        {loading && <QuestionCard.Text>Loading Questions...</QuestionCard.Text>}
 
         {!loading && !gameOver && (
           <QuestionCardContainer
             question={questions[number].question}
+            nextQuestion={nextQuestion}
             answers={questions[number].answers}
             userAnswer={userAnswers ? userAnswers[number] : undefined}
             callback={checkAnswer}

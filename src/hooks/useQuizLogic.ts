@@ -1,5 +1,5 @@
 import { CancelTokenSource } from "axios";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { fetchQuizQuestions, Difficulty, QuestionState } from "../API";
 
 export type AnswerObject = {
@@ -10,6 +10,7 @@ export type AnswerObject = {
 };
 const TOTAL_QUESTIONS = 10;
 
+
 function useQuizLogic() {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
@@ -17,7 +18,7 @@ function useQuizLogic() {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
-  
+
   const startTrivia = async () => {
     setLoading(true);
     setGameOver(false);
@@ -42,6 +43,8 @@ function useQuizLogic() {
     setNumber(0);
     setLoading(false);
   };
+
+ 
 
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!gameOver) {
