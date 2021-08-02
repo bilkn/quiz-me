@@ -34,7 +34,7 @@ function App() {
           }
         `}
       >
-        {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        {gameOver && (
           <QuestionCard.Button
             variant="secondary"
             className="start"
@@ -43,7 +43,17 @@ function App() {
           >
             Start
           </QuestionCard.Button>
-        ) : null}
+        )}
+        {TOTAL_QUESTIONS === userAnswers.length && !loading && (
+          <QuestionCard.Button
+            variant="secondary"
+            className="start"
+            onClick={startTrivia}
+            css="width:150px; margin:auto;"
+          >
+            Restart
+          </QuestionCard.Button>
+        )}
         {!gameOver && !loading ? (
           <Flex css="margin-top:1em;">
             <QuestionCard.Display>
@@ -54,7 +64,7 @@ function App() {
             </QuestionCard.Display>
           </Flex>
         ) : null}
-        {loading && <QuestionCard.Text>Loading Questions...</QuestionCard.Text>}
+        {loading && <QuestionCard.Text css="color:white;">Loading Questions...</QuestionCard.Text>}
 
         {!loading && !gameOver && (
           <QuestionCardContainer
@@ -63,13 +73,18 @@ function App() {
             answers={questions[number].answers}
             userAnswer={userAnswers ? userAnswers[number] : undefined}
             callback={checkAnswer}
+            end={TOTAL_QUESTIONS === userAnswers.length}
           />
         )}
         {!gameOver &&
         !loading &&
         userAnswers.length === number + 1 &&
         number !== TOTAL_QUESTIONS - 1 ? (
-          <QuestionCard.Button className="next" onClick={nextQuestion} css="margin-top:1em;">
+          <QuestionCard.Button
+            className="next"
+            onClick={nextQuestion}
+            css="margin-top:1em;"
+          >
             Next Question
           </QuestionCard.Button>
         ) : null}
